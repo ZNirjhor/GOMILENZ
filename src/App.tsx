@@ -374,7 +374,7 @@ export default function App() {
             </div>
             <div>
               <h1 className="text-xl font-bold tracking-tight text-slate-900 flex items-center gap-2">
-                <span>GOMIRENZ</span>
+                <span>GOMILENZ</span>
                 <span className="text-emerald-700 font-medium text-base">ゴミレンズ</span>
               </h1>
               <p className="text-xs text-slate-500">One man&apos;s trash is another man&apos;s treasure</p>
@@ -726,7 +726,7 @@ export default function App() {
 
         {/* Footer info */}
         <div className="mt-6 text-center text-xs text-slate-400">
-          GOMIRENZ / ゴミレンズ &bull; Tokyo 23 Wards Household Waste Guide &bull; Version 1.0
+          GOMILENZ / ゴミレンズ &bull; Tokyo 23 Wards Household Waste Guide &bull; Version 1.0
         </div>
       </main>
     </div>
