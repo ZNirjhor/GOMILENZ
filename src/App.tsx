@@ -9,6 +9,11 @@ import {
   Upload,
   Image as ImageIcon,
   X,
+  HelpCircle,
+  AlertTriangle,
+  BookOpen,
+  CheckCircle2,
+  Layers,
 } from 'lucide-react';
 
 const TOKYO_WARDS: string[] = [
@@ -46,13 +51,41 @@ interface ProcessedImage {
   fileName: string;
 }
 
+export interface SortingResultPart {
+  part: string;
+  category:
+    | 'burnable'
+    | 'non_burnable'
+    | 'resource_paper'
+    | 'resource_bottles_cans'
+    | 'resource_pet'
+    | 'plastic'
+    | 'oversized'
+    | 'drop_off'
+    | 'not_collected'
+    | 'unknown';
+  category_ja: string;
+  prep_steps: string[];
+  kb_reference: string;
+  confidence: 'high' | 'medium' | 'low';
+}
+
+export interface SortingResult {
+  item_name: string;
+  materials: string[];
+  parts: SortingResultPart[];
+  warnings: string[];
+  not_in_kb: boolean;
+  follow_up_question: string | null;
+}
+
 export default function App() {
   const [selectedWard, setSelectedWard] = useState<string>('Shibuya (渋谷)');
   const [item, setItem] = useState<string>('');
   const [image, setImage] = useState<ProcessedImage | null>(null);
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const [reply, setReply] = useState<string>('');
+  const [result, setResult] = useState<SortingResult | null>(null);
   const [error, setError] = useState<string>('');
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -184,7 +217,7 @@ export default function App() {
 
     setLoading(true);
     setError('');
-    setReply('');
+    setResult(null);
 
     try {
       const res = await fetch('/api/sort', {
@@ -209,7 +242,11 @@ export default function App() {
         throw new Error(data.error || 'Failed to sort item. Please try again.');
       }
 
-      setReply(data.reply || 'No sorting guidance received.');
+      if (data.result) {
+        setResult(data.result);
+      } else {
+        throw new Error('Invalid response structure received from assistant.');
+      }
     } catch (err: any) {
       setError(err?.message || 'Something went wrong while checking the item.');
     } finally {
@@ -222,14 +259,115 @@ export default function App() {
     'PET bottle with cap and label',
     'broken ceramic mug',
     'aluminum beverage can',
-    'cardboard delivery box',
+    'cooking oil plastic bottle',
+    'mobile battery power bank',
   ];
+
+  // Map category to color badges as specified:
+  // burnable red, non-burnable blue, resources green, plastic yellow, oversized purple, not collected grey
+  const getCategoryStyles = (category: SortingResultPart['category']) => {
+    switch (category) {
+      case 'burnable':
+        return {
+          badgeText: 'Burnable',
+          badgeBg: 'bg-red-600 text-white',
+          rowBorder: 'border-red-200',
+          accentColor: 'text-red-700',
+          lightBg: 'bg-red-50/50',
+        };
+      case 'non_burnable':
+        return {
+          badgeText: 'Non-burnable',
+          badgeBg: 'bg-blue-600 text-white',
+          rowBorder: 'border-blue-200',
+          accentColor: 'text-blue-700',
+          lightBg: 'bg-blue-50/50',
+        };
+      case 'resource_paper':
+        return {
+          badgeText: 'Resources (Paper)',
+          badgeBg: 'bg-emerald-600 text-white',
+          rowBorder: 'border-emerald-200',
+          accentColor: 'text-emerald-700',
+          lightBg: 'bg-emerald-50/50',
+        };
+      case 'resource_bottles_cans':
+        return {
+          badgeText: 'Resources (Bottles/Cans)',
+          badgeBg: 'bg-emerald-600 text-white',
+          rowBorder: 'border-emerald-200',
+          accentColor: 'text-emerald-700',
+          lightBg: 'bg-emerald-50/50',
+        };
+      case 'resource_pet':
+        return {
+          badgeText: 'Resources (PET Bottle)',
+          badgeBg: 'bg-emerald-600 text-white',
+          rowBorder: 'border-emerald-200',
+          accentColor: 'text-emerald-700',
+          lightBg: 'bg-emerald-50/50',
+        };
+      case 'plastic':
+        return {
+          badgeText: 'Plastic Resource',
+          badgeBg: 'bg-yellow-500 text-slate-900 font-bold',
+          rowBorder: 'border-yellow-300',
+          accentColor: 'text-yellow-800',
+          lightBg: 'bg-yellow-50/60',
+        };
+      case 'oversized':
+        return {
+          badgeText: 'Oversized',
+          badgeBg: 'bg-purple-600 text-white',
+          rowBorder: 'border-purple-200',
+          accentColor: 'text-purple-700',
+          lightBg: 'bg-purple-50/50',
+        };
+      case 'drop_off':
+        return {
+          badgeText: 'Drop-off Box',
+          badgeBg: 'bg-gray-600 text-white',
+          rowBorder: 'border-gray-200',
+          accentColor: 'text-gray-700',
+          lightBg: 'bg-gray-50',
+        };
+      case 'not_collected':
+        return {
+          badgeText: 'Not Collected',
+          badgeBg: 'bg-gray-600 text-white',
+          rowBorder: 'border-gray-300',
+          accentColor: 'text-gray-700',
+          lightBg: 'bg-gray-50',
+        };
+      case 'unknown':
+      default:
+        return {
+          badgeText: 'Unknown',
+          badgeBg: 'bg-gray-500 text-white',
+          rowBorder: 'border-gray-200',
+          accentColor: 'text-gray-600',
+          lightBg: 'bg-gray-50',
+        };
+    }
+  };
+
+  const getConfidenceStyle = (confidence: 'high' | 'medium' | 'low') => {
+    switch (confidence) {
+      case 'high':
+        return 'bg-emerald-100 text-emerald-800 border-emerald-300';
+      case 'medium':
+        return 'bg-amber-100 text-amber-800 border-amber-300';
+      case 'low':
+      default:
+        return 'bg-slate-100 text-slate-700 border-slate-300';
+    }
+  };
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans">
       {/* Header */}
       <header className="border-b border-slate-200 bg-white shadow-xs">
-        <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white shadow-sm">
               <Trash2 className="w-5 h-5" />
@@ -249,7 +387,7 @@ export default function App() {
       </header>
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-2xl w-full mx-auto px-4 py-8">
+      <main className="flex-1 max-w-3xl w-full mx-auto px-4 py-8">
         <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
           {/* 1. Dropdown of Tokyo's 23 wards in English with Japanese in brackets */}
           <div>
@@ -406,7 +544,7 @@ export default function App() {
                 {loading ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Checking...</span>
+                    <span>Checking rules...</span>
                   </>
                 ) : (
                   <span>Check</span>
@@ -426,17 +564,162 @@ export default function App() {
             </div>
           )}
 
-          {/* 3. Reply shown as plain text under the button */}
-          {reply && (
-            <div className="mt-6 pt-6 border-t border-slate-200">
-              <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
-                Sorting Advice ({selectedWard})
-              </h2>
-              <div className="p-4 bg-slate-50 rounded-xl border border-slate-200">
-                <p className="whitespace-pre-wrap text-slate-800 text-sm leading-relaxed font-normal">
-                  {reply}
+          {/* Follow-up question shown above the result card if set */}
+          {result && result.follow_up_question && (
+            <div className="p-4 rounded-xl bg-blue-50 border border-blue-200 text-blue-900 flex items-start gap-3 shadow-2xs">
+              <HelpCircle className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+              <div className="flex-1">
+                <div className="text-xs font-bold uppercase tracking-wider text-blue-600 mb-0.5">
+                  Follow-up Question
+                </div>
+                <p className="text-sm font-medium">{result.follow_up_question}</p>
+                <p className="text-xs text-blue-600 mt-1">
+                  You can refine your input in the text box above to confirm sizing or materials.
                 </p>
               </div>
+            </div>
+          )}
+
+          {/* 3. Structured Result Card */}
+          {result && (
+            <div className="mt-6 pt-6 border-t border-slate-200 space-y-5">
+              {/* Not in KB banner if applicable */}
+              {result.not_in_kb && (
+                <div className="p-4 rounded-xl bg-amber-50 border border-amber-300 text-amber-900 flex items-start gap-3">
+                  <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-sm">Not in my sources — check your ward&apos;s official guide</p>
+                    <p className="text-xs text-amber-700 mt-0.5">
+                      This item or specific ward variation is not detailed in our verified knowledge base. Please verify with your local municipal collection calendar or ward app.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Result Card Header */}
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h2 className="text-lg font-bold text-slate-900 capitalize">
+                      {result.item_name || item || 'Checked Item'}
+                    </h2>
+                    <span className="text-xs bg-emerald-100 text-emerald-800 font-medium px-2 py-0.5 rounded-md">
+                      {selectedWard}
+                    </span>
+                  </div>
+                  {result.materials && result.materials.length > 0 && (
+                    <div className="flex flex-wrap items-center gap-1.5 mt-1.5">
+                      <span className="text-xs text-slate-500 flex items-center gap-1">
+                        <Layers className="w-3 h-3" /> Materials:
+                      </span>
+                      {result.materials.map((mat, idx) => (
+                        <span
+                          key={idx}
+                          className="text-[11px] bg-white border border-slate-200 text-slate-700 px-2 py-0.5 rounded-md font-medium"
+                        >
+                          {mat}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <div className="text-xs text-slate-500 text-right shrink-0">
+                  <span>{result.parts.length} part{result.parts.length > 1 ? 's' : ''} to sort</span>
+                </div>
+              </div>
+
+              {/* Rows: One row per part */}
+              <div className="space-y-3.5">
+                <div className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                  Sorting Breakdown by Component
+                </div>
+
+                {result.parts.map((part, index) => {
+                  const styles = getCategoryStyles(part.category);
+                  const confidenceClass = getConfidenceStyle(part.confidence);
+
+                  return (
+                    <div
+                      key={index}
+                      className={`p-4 sm:p-5 rounded-xl border ${styles.rowBorder} ${styles.lightBg} transition-all space-y-3`}
+                    >
+                      {/* Top row: Part name, Category badges, Japanese name, Confidence chip */}
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                        <div className="flex flex-wrap items-center gap-2">
+                          {/* Part name */}
+                          <span className="text-base font-bold text-slate-900 capitalize">
+                            {part.part}
+                          </span>
+
+                          {/* Coloured bin badge */}
+                          <span
+                            className={`text-xs px-2.5 py-1 rounded-md font-semibold tracking-tight shadow-2xs ${styles.badgeBg}`}
+                          >
+                            {styles.badgeText}
+                          </span>
+
+                          {/* Japanese bin name */}
+                          <span className="text-xs font-bold bg-white text-slate-800 border border-slate-300 px-2 py-0.5 rounded-md">
+                            {part.category_ja}
+                          </span>
+                        </div>
+
+                        {/* Confidence chip */}
+                        <div className="flex items-center gap-2 shrink-0">
+                          <span
+                            className={`text-[10px] font-bold px-2 py-0.5 rounded-full border uppercase tracking-wider ${confidenceClass}`}
+                          >
+                            {part.confidence} confidence
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Prep steps */}
+                      {part.prep_steps && part.prep_steps.length > 0 && (
+                        <div className="pt-1">
+                          <p className="text-xs font-semibold text-slate-600 mb-1 flex items-center gap-1">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                            <span>Preparation Steps:</span>
+                          </p>
+                          <ul className="list-disc list-inside text-xs text-slate-700 space-y-0.5 pl-1">
+                            {part.prep_steps.map((step, sIdx) => (
+                              <li key={sIdx} className="leading-relaxed">
+                                {step}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* Source reference */}
+                      <div className="pt-2 border-t border-slate-200/60 flex items-center justify-between text-xs text-slate-500">
+                        <span className="flex items-center gap-1">
+                          <BookOpen className="w-3.5 h-3.5 text-slate-400" />
+                          <span>Source: {part.kb_reference || 'Knowledge Base'}</span>
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Warnings in an orange box */}
+              {result.warnings && result.warnings.length > 0 && (
+                <div className="p-4 rounded-xl bg-orange-50 border border-orange-300 text-orange-950 space-y-1.5 shadow-2xs">
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-orange-800">
+                    <AlertTriangle className="w-4 h-4 text-orange-600 shrink-0" />
+                    <span>Important Warnings &amp; Guidelines</span>
+                  </div>
+                  <ul className="list-disc list-inside text-xs text-orange-900 space-y-1 pl-1">
+                    {result.warnings.map((w, wIdx) => (
+                      <li key={wIdx} className="leading-relaxed">
+                        {w}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           )}
         </div>
