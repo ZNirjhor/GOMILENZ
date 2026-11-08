@@ -1,0 +1,6 @@
+{
+  "name": "GOMIRENZ / ゴミレンズ",
+  "description": "Tokyo household waste sorting assistant for all 23 wards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
