@@ -70,7 +70,7 @@ Background: TMG reports that plastic collection grew from 12 wards (FY2019) to 2
 | Meguro (目黒) | Jul 2023 | Container and product plastic in the same see-through bag on resource day. Products under about 30 cm. | HIGH |
 | Ota (大田) | Apr 2025 | Weekly plastic day. All three conditions required: (1) clean, (2) plastic only, with no screws or rubber attached, (3) under 30 cm. Foam and food trays go on plastic day. | HIGH |
 | Shibuya (渋谷) | Jul 2022 | Plastic goes out on resource day. Products about 30 cm or under. Remove batteries from toys. | HIGH (2022 flyer) |
-| Nakano (中野) | Apr 2024 | Called "resource plastic". | HIGH |
+| Nakano (中野) | Apr 2024 | Called "resource plastic" (資源プラスチック), weekly. Packaging with the プラ mark plus items made only of plastic (stationery, bath and kitchen items). Anything with even one non-plastic part, rubber or leather → burnable. Over 30 cm → oversized; cut hoses and other long items to 30 cm or less. Stickers can stay on. No double-bagging. PET caps and labels go here. See C4 for Nakano's other differences. | HIGH (July 2026 leaflet) |
 | Suginami (杉並) | Apr 2026 | Called "resource plastic". Products were added to the existing plastic day. | HIGH |
 | Toshima (豊島) | Oct 2023 | Same day as cardboard, paper and cloth. Food trays and plastic bottle-type containers moved to plastic. | HIGH |
 | Kita (北) | Apr 2023 | | MED (secondary source only) |
@@ -124,7 +124,17 @@ C2. Rechargeable batteries and devices with built-in batteries:
 - Shinjuku: dry-cell batteries are collected with resources (bottles/cans). Small rechargeable batteries have their own instructions on the ward page. [HIGH for dry cells; rechargeable: CHECK]
 - All wards: never in plastic or burnable waste (A8). Other wards: [CHECK].
 
-C3. Lighters: Setagaya — completely empty, in a separate bag labelled ライター, non-burnable. Shinagawa — non-burnable. Others: [CHECK].
+C3. Lighters: Setagaya — completely empty, in a separate bag labelled ライター, non-burnable. Shinagawa — non-burnable. Nakano — see C4. Others: [CHECK].
+
+C4. Nakano (中野) — other differences [HIGH — Nakano leaflet, July 2026, unless noted]:
+- Non-burnable waste is called 陶器・ガラス・金属ごみ (ceramics, glass, metal), collected twice a month. It includes pots and pans, aluminium foil, wire hangers, metal jar lids, blades (wrapped), and disposable hand warmers. Unbroken fluorescent tubes go to drop-off points instead.
+- Spray cans, gas cartridges and lighters: each in a separate bag labelled with its contents, out on the 陶器・ガラス・金属ごみ day. Do not puncture them.
+- Rechargeable batteries and products with them built in (mobile batteries, e-cigarettes, handheld fans, wireless earbuds, electric toothbrushes): since April 2026 collected at the collection point on the 陶器・ガラス・金属ごみ day, in a separate bag labelled リチウムイオン電池, with the terminals taped. A swollen or damaged battery goes to the 清掃事務所 (sanitation office), never the collection point. Never put them in burnable or plastic waste. (The April 2025 English leaflet sends them to drop-off boxes only; the 2026 leaflet is newer.)
+- Dry-cell and button batteries: battery collection boxes at public facilities (April 2025 English leaflet) [MED].
+- Bottles, cans and PET bottles go to a separate bottle/can/PET collection point, not the usual one. Only COLOURLESS PET bottles are accepted; coloured PET bottles go in burnable waste. Food and drink bottles and cans only; other bottles and cans go to 陶器・ガラス・金属ごみ.
+- Paper and old clothes are collected by neighbourhood groups (集団回収) at their own points, weekly by 8:00 a.m. Clothes only on days with no rain forecast. Paper from businesses is not accepted.
+- Umbrellas: the 2026 leaflet lists umbrellas, including ones over 30 cm, under 陶器・ガラス・金属ごみ. The April 2025 English leaflet listed them as oversized. Follow the 2026 leaflet, but confidence is MED.
+- Oversized: any side over 30 cm. Heavy hard items under 30 cm (dumbbells, bowling balls) also count as oversized. Book on 03-5715-2255 or online.
 
 ---
 
@@ -178,31 +188,33 @@ Default rules for most wards. "Plastic*" means: plastic resource in Type 1 wards
 - Collection DAYS vary by street address and are NOT in this file. Send users to their ward's calendar or sorting app.
 - Kita, Chiyoda, Taito and Shinagawa plastic rows are [MED]: the start date comes from a secondary tracking blog and the 23-ward annual statistics, not from a 2025–2026 ward page I read directly.
 - Katsushika's exact bagging rule for product plastic is unverified.
-- Spray cans, batteries, lighters, clothes and fluorescent tubes are verified only for the wards named in Part C.
+- Spray cans, batteries, lighters, clothes and fluorescent tubes are verified only for the wards named in Part C. Nakano (C4) is the only ward with a full ward-specific section so far.
 
 ---
 
 ## Part F. Sources
 
-1. Setagaya City, "How to Properly Sort and Dispose of Garbage and Recyclable Resources", English, April 2026. city.setagaya.lg.jp/documents/409/wakedashid-data-e.pdf
-2. Ota City, Plastic page (updated 2026-09-02). city.ota.tokyo.jp/seikatsu/gomi/shigentogomi/plastics_recycle.html
-3. Nerima City, plastic rule change from October 2026. city.nerima.tokyo.jp/kurashi/gomi/oshirase/purahenkou.html
-4. Edogawa City, Product plastic collection (updated 2026-07-14). city.edogawa.tokyo.jp/e025/kurashi/gomi_recycle/gomigenryo/seihin_plastic/index.html — plus English pamphlet page city.edogawa.tokyo.jp/e025/kurashi/gomi_recycle/kategomi/bunbetsu/shigengomi/pamphlet/english.html
-5. Adachi City, 2026 sorting guide (plastic ward-wide from FY2026). city.adachi.tokyo.jp/documents/56163/wakedashi2026.pdf ; Adachi mayor's blog, Feb 2026.
-6. Suginami City, Environment and Sanitation Council material, 2026-03-24 (ward-wide plastic from April 2026). city.suginami.tokyo.jp/documents/24497/4-1.pdf
-7. Arakawa City newsletter, 2025-09-11 (plastic from Oct 2025). city.arakawa.tokyo.jp/documents/41844/20250911_1.pdf
-8. Bunkyo City plastic flyer (April 2025 start). Bunkyo "ごみと資源の分け方・出し方" April 2025 edition. city.bunkyo.lg.jp/documents/955/gomitoshigennowakekatadashikata_hozonban.pdf
-9. Sumida City plastic flyer (April 2024 start). city.sumida.lg.jp/kurashi/gomi_recycle/oshirase/pura_start.files/
-10. Koto City plastic page. city.koto.lg.jp/381104/gomi/kate/plastics.html
-11. Meguro City plastic page. city.meguro.tokyo.jp/kurashi/shizen/gomi/katei_sigen/shusekijo_sigen/plasticyouki.html
-12. Shinjuku City, bottles/cans/PET/spray cans/batteries page (updated 2025-04-01). city.shinjuku.lg.jp/seikatsu/file09_01_00009.html
-13. Shinagawa City, "資源・ごみの分け方・出し方" 2025. city.shinagawa.tokyo.jp/contentshozon2025/sigengomi2025.pdf
-14. Toshima City plastic pamphlet (English), 2023. city.toshima.lg.jp/150/documents/plastic-pamphlet-2023-english-web.pdf
-15. Itabashi City, plastic page and A–Z item list (April 2026). city.itabashi.tokyo.jp/tetsuduki/gomi/1047642/1047645.html
-16. Nakano City, internal report on product plastic from April 2024. city.tokyo-nakano.lg.jp
-17. Katsushika City, product plastic Q&A (FY2025). www2.city.katsushika.lg.jp
-18. Chuo City FAQ, sorting categories. city.chuo.lg.jp/a0039/faq/kurashi/gomi/bunbetsu/0025.html
-19. Minato City English Waste Sorting Guidebook. city.minato.tokyo.jp/easyjp/en/life/waste/
-20. Shibuya City plastic flyer (July 2022), reproduced in Setagaya council material. city.setagaya.lg.jp/documents/483/tajititainojirei.pdf
-21. TMG Bureau of Environment, "プラスチックの持続可能な利用に向けて", September 2026 (12 → 22 wards). env.go.jp/content/000437431.pdf
-22. Secondary tracker: "東京23区のごみ問題を考える" blog, status as of 2026-04-01 (used for Chiyoda, Taito, Kita, Shinagawa dates and Chuo's 2029 plan). wa8823.hatenablog.com
+Full links, including the www. or www2. prefix (they don't load without it).
+
+1. Setagaya City, "How to Properly Sort and Dispose of Garbage and Recyclable Resources", English, April 2026. https://www.city.setagaya.lg.jp/documents/409/wakedashid-data-e.pdf
+2. Ota City, Plastic page (updated 2026-09-02). https://www.city.ota.tokyo.jp/seikatsu/gomi/shigentogomi/plastics_recycle.html
+3. Nerima City, plastic rule change from October 2026. https://www.city.nerima.tokyo.jp/kurashi/gomi/oshirase/purahenkou.html
+4. Edogawa City, Product plastic collection (updated 2026-07-14). https://www.city.edogawa.tokyo.jp/e025/kurashi/gomi_recycle/gomigenryo/seihin_plastic/index.html — English pamphlet page: https://www.city.edogawa.tokyo.jp/e025/kurashi/gomi_recycle/kategomi/bunbetsu/shigengomi/pamphlet/english.html
+5. Adachi City, 2026 sorting guide (plastic ward-wide from FY2026). https://www.city.adachi.tokyo.jp/documents/56163/wakedashi2026.pdf — Adachi mayor's blog, Feb 2026: https://www.city.adachi.tokyo.jp/hisho/ku/kucho/20260210-mainichi.html
+6. Suginami City, Environment and Sanitation Council material, 2026-03-24 (ward-wide plastic from April 2026). https://www.city.suginami.tokyo.jp/documents/24497/4-1.pdf
+7. Arakawa City newsletter, 2025-09-11 (plastic from Oct 2025). https://www.city.arakawa.tokyo.jp/documents/41844/20250911_1.pdf
+8. Bunkyo City, "ごみと資源の分け方・出し方" April 2025 edition: https://www.city.bunkyo.lg.jp/documents/955/gomitoshigennowakekatadashikata_hozonban.pdf — Bunkyo plan for ward-wide plastic collection (FY2025): https://www.city.bunkyo.lg.jp/documents/6919/202392616250.pdf
+9. Sumida City plastic flyer (April 2024 start). https://www.city.sumida.lg.jp/kurashi/gomi_recycle/oshirase/pura_start.files/honkakutirasikeijiyou1.pdf
+10. Koto City plastic page. https://www.city.koto.lg.jp/381104/gomi/kate/plastics.html
+11. Meguro City plastic page. https://www.city.meguro.tokyo.jp/kurashi/shizen/gomi/katei_sigen/shusekijo_sigen/plasticyouki.html
+12. Shinjuku City, bottles/cans/PET/spray cans/batteries page (updated 2025-04-01). https://www.city.shinjuku.lg.jp/seikatsu/file09_01_00009.html
+13. Shinagawa City, "資源・ごみの分け方・出し方" 2025. https://www.city.shinagawa.tokyo.jp/contentshozon2025/sigengomi2025.pdf
+14. Toshima City plastic pamphlet (English), 2023. https://www.city.toshima.lg.jp/150/documents/plastic-pamphlet-2023-english-web.pdf
+15. Itabashi City plastic page: https://www.city.itabashi.tokyo.jp/tetsuduki/gomi/1047642/1047645.html — A–Z item list (April 2026): https://www.city.itabashi.tokyo.jp/_res/projects/default_project/_page_/001/001/879/r8.1.pdf
+16. Nakano City, "資源とごみの分け方・出し方" leaflet, July 2026: https://www.city.tokyo-nakano.lg.jp/kurashi/gomi/dashikata/leaflet.files/nakano_gomi_Leaflet_2026.pdf — English leaflet, April 2025: https://www.city.tokyo-nakano.lg.jp/kurashi/gomi/dashikata/leaflet.files/nakanoGomi_2025_en.pdf
+17. Katsushika City, product plastic Q&A (FY2025). https://www2.city.katsushika.lg.jp/_res/projects/default_project/_page_/001/036/550/qa1.pdf
+18. Chuo City FAQ, sorting categories. https://www.city.chuo.lg.jp/a0039/faq/kurashi/gomi/bunbetsu/0025.html
+19. Minato City English Waste Sorting Guidebook page. https://www.city.minato.tokyo.jp/easyjp/en/life/waste/
+20. Shibuya City plastic flyer (July 2022), reproduced in Setagaya council material. https://www.city.setagaya.lg.jp/documents/483/tajititainojirei.pdf
+21. TMG Bureau of Environment, "プラスチックの持続可能な利用に向けて", September 2026 (12 → 22 wards). https://www.env.go.jp/content/000437431.pdf
+22. Secondary tracker: "東京23区のごみ問題を考える" blog, status as of 2026-04-01 (used for Chiyoda, Taito, Kita, Shinagawa dates and Chuo's 2029 plan). https://wa8823.hatenablog.com/entry/2026/04/02/23%E5%8C%BA%E3%81%AE%E3%83%97%E3%83%A9%E3%82%B9%E3%83%81%E3%83%83%E3%82%AF%E8%B3%87%E6%BA%90%E5%8C%962026%E5%B9%B44%E6%9C%881%E6%97%A5%E7%8F%BE%E5%9C%A8%E3%80%81%E3%80%8C%E5%AE%B9%E3%83%AA%E3%83%97
