@@ -22,7 +22,7 @@ A1. Bags. There is no paid, designated bag in the 23 wards. Use transparent or s
 A2. Timing. Put waste out on the morning of collection day, usually by 8:00 a.m. Some areas use other times. For example, parts of Setagaya near Sangenjaya and Shimokitazawa stations need burnable waste out by 7:00 a.m., and Nerima's bottles, cans and PET bottles go to the collection spot by 9:00 a.m. Do not put waste out the night before. [HIGH — Setagaya, Ota, Bunkyo, Shinagawa, Nerima guides]
 
 A3. Main categories found in every ward:
-- Burnable waste (可燃ごみ / 燃やすごみ): kitchen scraps, paper that can't be recycled, rubber and leather items, small amounts of wood, diapers. Plastic goes here only in wards that don't collect it as a resource (see Part B).
+- Burnable waste (可燃ごみ / 燃やすごみ): kitchen scraps, paper that can't be recycled, rubber and leather items (EXCEPT Taito, where they are non-burnable — see C5), small amounts of wood, diapers. Plastic goes here only in wards that don't collect it as a resource (see Part B).
 - Non-burnable waste (不燃ごみ / 燃やさないごみ): metal, glass, ceramics, small appliances about 30 cm or smaller. Usually collected twice a month.
 - Resources (資源): paper (newspapers, magazines, cardboard, cartons), food and drink glass bottles, food and drink cans, PET bottles. Usually weekly.
 - Plastic (プラスチック / 資源プラスチック): in most wards a separate resource category. See Part B.
@@ -63,7 +63,7 @@ Background: TMG reports that plastic collection grew from 12 wards (FY2019) to 2
 | Minato (港) | 2008 | Collects "various kinds of plastics as resources". | HIGH |
 | Shinjuku (新宿) | Apr 2024 | Called "resource plastic" (資源プラスチック). Plastic caps from bottles and spray cans also go here. | HIGH |
 | Bunkyo (文京) | Apr 2025 | New weekly plastic day. Products must be all plastic and under 30 cm. | HIGH |
-| Taito (台東) | Apr 2025 | | MED |
+| Taito (台東) | Apr 2025 | Plastic is its own category, separate from the recyclables point. It covers items with the プラ mark and items made entirely of plastic (bags, styrofoam and cushioning, foam trays and cups, caps and labels). Lidded container or clear bag. Rinse or wipe; still dirty → burnable. The guide gives no size limit for plastic; oversized is anything over 30 cm. See C5. | HIGH (June 2025 English guide) |
 | Sumida (墨田) | Apr 2024 | Weekly plastic day. Food trays moved from resource day to plastic day. About 30 cm limit. Don't double-bag. | HIGH |
 | Koto (江東) | Oct 2023 | "Plastic day". 100% plastic products about 30 cm or under. Foam trays and styrofoam may be handled on resource day; confirm locally. | HIGH (foam: CHECK) |
 | Shinagawa (品川) | Apr 2024 | Plastic that won't come clean goes in burnable waste. | MED |
@@ -136,6 +136,15 @@ C4. Nakano (中野) — other differences [HIGH — Nakano leaflet, July 2026, u
 - Umbrellas: the 2026 leaflet lists umbrellas, including ones over 30 cm, under 陶器・ガラス・金属ごみ. The April 2025 English leaflet listed them as oversized. Follow the 2026 leaflet, but confidence is MED.
 - Oversized: any side over 30 cm. Heavy hard items under 30 cm (dumbbells, bowling balls) also count as oversized. Book on 03-5715-2255 or online.
 
+C5. Taito (台東) — other differences [HIGH — Taito English guide, issued June 2025; the city site marks it "Archived", so a newer edition may exist]:
+- RUBBER AND LEATHER ARE NON-BURNABLE in Taito: rubber products, leather goods, shoes, bags and balls go in non-burnable waste, not burnable. Non-burnable also takes metal, glass, ceramics, aluminium foil, thermometers and blood-pressure meters, metal caps, and dirty cans.
+- Spray cans, cassette gas cylinders and lighters go in non-burnable waste, in a separate bag labelled with the product type. Paint cans go in non-burnable too.
+- Burnable and non-burnable waste are collected door-to-door (戸別収集). Branches: cut to 50 cm and bundle with string. Wrap skewers and other sharp items in paper and mark キケン.
+- PET bottles: cap and label off, rinse, crush if possible, into the green container or PET net. Glass bottles → yellow container; cans → blue container.
+- Old clothes, towels, sheets and blankets: dedicated container, by noon on the 1st and 3rd Thursdays of the month.
+- Dry-cell batteries (manganese, alkaline): collection box. Rechargeable batteries are not covered by this guide [CHECK]; never put them in plastic or burnable waste (A8).
+- Not collected: soil, stones, sand; PCs (manufacturer); home-appliance-recycling items.
+
 ---
 
 ## Part D. Common items quick guide
@@ -172,7 +181,7 @@ Default rules for most wards. "Plastic*" means: plastic resource in Type 1 wards
 | Pizza box, oily or smelly paper | Burnable | | HIGH |
 | Thermal receipt, photos, waterproof paper | Burnable | | HIGH |
 | Clothes, cloth | Burnable (Setagaya) | Several wards collect clothes and cloth at drop-off points or on resource day. [CHECK] | MED |
-| Rubber or leather shoes, bags | Burnable | | HIGH |
+| Rubber or leather shoes, bags | Burnable (Taito: NON-burnable, see C5) | | HIGH |
 | Diapers | Burnable | Flush any waste first. | HIGH |
 | Wood / branches | Burnable | Pieces no more than 10 cm thick and 50 cm long (Setagaya). | HIGH |
 | Futon, furniture, bicycle, large clothes case | Oversized (粗大ごみ) | Book ahead, pay, attach the sticker. | HIGH |
@@ -186,9 +195,9 @@ Default rules for most wards. "Plastic*" means: plastic resource in Type 1 wards
 
 - This file covers each ward's PLASTIC rules plus shared rules. It does NOT include each ward's full A–Z item dictionary (五十音順 分別辞典), which runs to hundreds of items per ward.
 - Collection DAYS vary by street address and are NOT in this file. Send users to their ward's calendar or sorting app.
-- Kita, Chiyoda, Taito and Shinagawa plastic rows are [MED]: the start date comes from a secondary tracking blog and the 23-ward annual statistics, not from a 2025–2026 ward page I read directly.
+- Kita, Chiyoda and Shinagawa plastic rows are [MED]: the start date comes from a secondary tracking blog and the 23-ward annual statistics, not from a 2025–2026 ward page I read directly.
 - Katsushika's exact bagging rule for product plastic is unverified.
-- Spray cans, batteries, lighters, clothes and fluorescent tubes are verified only for the wards named in Part C. Nakano (C4) is the only ward with a full ward-specific section so far.
+- Spray cans, batteries, lighters, clothes and fluorescent tubes are verified only for the wards named in Part C. Nakano (C4) and Taito (C5) are the only wards with a full ward-specific section so far.
 
 ---
 
@@ -217,4 +226,5 @@ Full links, including the www. or www2. prefix (they don't load without it).
 19. Minato City English Waste Sorting Guidebook page. https://www.city.minato.tokyo.jp/easyjp/en/life/waste/
 20. Shibuya City plastic flyer (July 2022), reproduced in Setagaya council material. https://www.city.setagaya.lg.jp/documents/483/tajititainojirei.pdf
 21. TMG Bureau of Environment, "プラスチックの持続可能な利用に向けて", September 2026 (12 → 22 wards). https://www.env.go.jp/content/000437431.pdf
-22. Secondary tracker: "東京23区のごみ問題を考える" blog, status as of 2026-04-01 (used for Chiyoda, Taito, Kita, Shinagawa dates and Chuo's 2029 plan). https://wa8823.hatenablog.com/entry/2026/04/02/23%E5%8C%BA%E3%81%AE%E3%83%97%E3%83%A9%E3%82%B9%E3%83%81%E3%83%83%E3%82%AF%E8%B3%87%E6%BA%90%E5%8C%962026%E5%B9%B44%E6%9C%881%E6%97%A5%E7%8F%BE%E5%9C%A8%E3%80%81%E3%80%8C%E5%AE%B9%E3%83%AA%E3%83%97
+22. Taito City, "How to sort garbage" English guide, issued June 2025 (marked "Archived" on the city site). https://www.city.taito.lg.jp/kurashi/gomi/wakekata/20180124165732477.files/English.pdf
+23. BACKUP SOURCE — secondary tracker: "東京23区のごみ問題を考える" blog, plastic status of all 23 wards as of 2026-04-01. Used for Chiyoda, Kita and Shinagawa start dates and Chuo's 2029 plan, and as the fallback whenever an official link stops working. Anything taken only from here is tagged [MED]. https://wa8823.hatenablog.com/entry/2026/04/02/23%E5%8C%BA%E3%81%AE%E3%83%97%E3%83%A9%E3%82%B9%E3%83%81%E3%83%83%E3%82%AF%E8%B3%87%E6%BA%90%E5%8C%962026%E5%B9%B44%E6%9C%881%E6%97%A5%E7%8F%BE%E5%9C%A8%E3%80%81%E3%80%8C%E5%AE%B9%E3%83%AA%E3%83%97
