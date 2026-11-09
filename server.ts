@@ -11,17 +11,28 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Load Knowledge Base
 const kbFilePath = path.resolve(__dirname, 'src', 'tokyo_23_wards_sorting_kb.md');
-const KNOWLEDGE_BASE = readFileSync(
-  existsSync(kbFilePath) ? kbFilePath : path.resolve('src/tokyo_23_wards_sorting_kb.md'),
-  'utf8'
-);
+let KNOWLEDGE_BASE = '';
+try {
+  KNOWLEDGE_BASE = readFileSync(
+    existsSync(kbFilePath) ? kbFilePath : path.resolve('src/tokyo_23_wards_sorting_kb.md'),
+    'utf8'
+  );
+} catch (err: any) {
+  console.error('Failed to load KB file:', err);
+}
 
 // Load System Instruction v3
 const sysInstructionPath = path.resolve(__dirname, 'src', 'system_instruction_v3.md');
-const SYSTEM_INSTRUCTION_V3 = readFileSync(
-  existsSync(sysInstructionPath) ? sysInstructionPath : path.resolve('src/system_instruction_v3.md'),
-  'utf8'
-);
+let SYSTEM_INSTRUCTION_V3 = '';
+try {
+  SYSTEM_INSTRUCTION_V3 = readFileSync(
+    existsSync(sysInstructionPath) ? sysInstructionPath : path.resolve('src/system_instruction_v3.md'),
+    'utf8'
+  );
+} catch (err: any) {
+  console.error('Failed to load system instruction v3 file:', err);
+  SYSTEM_INSTRUCTION_V3 = 'You are GOMILENZ (ゴミレンズ), a household waste sorting assistant for Tokyo.\nTarget ward: {ward}\n\n{KNOWLEDGE_BASE}';
+}
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
@@ -229,23 +240,40 @@ app.post('/api/sort', async (req, res) => {
     throw lastError || new Error('No valid sorting analysis received.');
   } catch (error: any) {
     console.error('Gemini sorting error:', error);
-    let message = 'Unable to check sorting rules at this moment. Please try again.';
+    let status = 500;
+    let message = error?.message || 'Unable to check sorting rules at this moment. Please try again.';
+
+    if (typeof error?.status === 'number') {
+      status = error.status;
+    } else if (typeof error?.statusCode === 'number') {
+      status = error.statusCode;
+    }
 
     if (error?.message) {
       try {
         const parsed = JSON.parse(error.message);
         if (parsed?.error?.message) {
           message = parsed.error.message;
-        } else {
-          message = error.message;
+          if (typeof parsed?.error?.code === 'number') {
+            status = parsed.error.code;
+          }
         }
       } catch {
-        message = error.message;
+        // use raw error.message
       }
     }
 
-    return res.status(500).json({ error: message });
+    if (status < 400 || status > 599) {
+      status = 500;
+    }
+
+    return res.status(status).json({ error: message });
   }
+});
+
+// Handle missing API routes with JSON error
+app.all('/api/*', (_req, res) => {
+  res.status(404).json({ error: 'API route not found' });
 });
 
 // Vite middlewares for dev, static dist for production
@@ -262,6 +290,22 @@ if (process.env.NODE_ENV !== 'production') {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
   });
 }
+
+// Global Express error-handling middleware returning JSON
+app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+  console.error('Global Express error:', err);
+  let status = 500;
+  if (typeof err?.status === 'number') {
+    status = err.status;
+  } else if (typeof err?.statusCode === 'number') {
+    status = err.statusCode;
+  }
+  if (status < 400 || status > 599) {
+    status = 500;
+  }
+  const message = err?.message || 'An unexpected server error occurred';
+  res.status(status).json({ error: message });
+});
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`GOMILENZ server listening on http://0.0.0.0:${PORT}`);

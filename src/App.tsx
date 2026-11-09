@@ -237,12 +237,23 @@ export default function App() {
         }),
       });
 
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || 'Failed to sort item. Please try again.');
+      const rawText = await res.text();
+      let data: any = null;
+
+      try {
+        data = JSON.parse(rawText);
+      } catch {
+        const snippet = rawText.slice(0, 200);
+        throw new Error(
+          snippet ? `Server error (${res.status}): ${snippet}` : `Server error (${res.status})`
+        );
       }
 
-      if (data.result) {
+      if (!res.ok) {
+        throw new Error(data?.error || `Server error (${res.status})`);
+      }
+
+      if (data?.result) {
         setResult(data.result);
       } else {
         throw new Error('Invalid response structure received from assistant.');
