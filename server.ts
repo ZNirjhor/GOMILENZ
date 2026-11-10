@@ -5,6 +5,8 @@ import { fileURLToPath } from 'url';
 import { GoogleGenAI, ThinkingLevel, Type } from '@google/genai';
 import { readFileSync, existsSync } from 'fs';
 
+process.env.DISABLE_HMR = 'true';
+
 dotenv.config();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -169,6 +171,12 @@ app.post('/api/sort', async (req, res) => {
       return res.status(400).json({ error: 'Please type an item name or upload a photo to check.' });
     }
 
+    if (!KNOWLEDGE_BASE || KNOWLEDGE_BASE.trim().length < 1000) {
+      return res.status(500).json({
+        error: 'Knowledge base failed to load - answers would not be grounded. Check that src/tokyo_23_wards_sorting_kb.md exists.',
+      });
+    }
+
     const itemText = hasItem ? (item as string).trim() : '';
     const wardText = ward && typeof ward === 'string' && ward.trim() ? ward.trim() : 'Tokyo';
 
@@ -201,36 +209,46 @@ app.post('/api/sort', async (req, res) => {
     const models = ['gemini-3.8-flash', 'gemini-3.1-flash-lite'];
 
     for (const model of models) {
-      try {
-        const config: Record<string, any> = {
-          systemInstruction,
-          responseMimeType: 'application/json',
-          responseSchema: sortingResponseSchema,
-        };
+      for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+          const config: Record<string, any> = {
+            systemInstruction,
+            responseMimeType: 'application/json',
+            responseSchema: sortingResponseSchema,
+          };
 
-        if (model === 'gemini-3.8-flash') {
-          config.thinkingConfig = { thinkingLevel: ThinkingLevel.LOW };
-        }
+          if (model === 'gemini-3.8-flash') {
+            config.thinkingConfig = { thinkingLevel: ThinkingLevel.LOW };
+          }
 
-        const response = await ai.models.generateContent({
-          model,
-          contents,
-          config,
-        });
+          const response = await ai.models.generateContent({
+            model,
+            contents,
+            config,
+          });
 
-        const rawText = response.text?.trim();
-        if (rawText) {
-          try {
-            parsedResult = JSON.parse(rawText) as SortingResult;
-            break;
-          } catch (parseErr) {
-            console.warn(`Failed to parse JSON output from ${model}:`, parseErr, rawText);
+          const rawText = response.text?.trim();
+          if (rawText) {
+            try {
+              parsedResult = JSON.parse(rawText) as SortingResult;
+              break;
+            } catch (parseErr) {
+              console.warn(`Failed to parse JSON output from ${model}:`, parseErr, rawText);
+            }
+          }
+        } catch (err: any) {
+          lastError = new Error(`[${model}] ${err?.message || err}`);
+          console.warn(`Model ${model} (attempt ${attempt + 1}) request failed:`, err?.message || err);
+          const errMsg = String(err?.message || err);
+          if (errMsg.includes('429') || errMsg.includes('RESOURCE_EXHAUSTED')) {
+            break; // Daily quota exhausted - retrying the same model is pointless; move to the next model
+          }
+          if (attempt === 0) {
+            await new Promise((r) => setTimeout(r, 1000));
           }
         }
-      } catch (err: any) {
-        lastError = err;
-        console.warn(`Model ${model} request failed:`, err?.message || err);
       }
+      if (parsedResult) break;
     }
 
     if (parsedResult) {
@@ -251,15 +269,22 @@ app.post('/api/sort', async (req, res) => {
 
     if (error?.message) {
       try {
-        const parsed = JSON.parse(error.message);
+        let jsonStr = error.message;
+        const braceIdx = jsonStr.indexOf('{');
+        if (braceIdx !== -1) {
+          jsonStr = jsonStr.slice(braceIdx);
+        }
+        const parsed = JSON.parse(jsonStr);
         if (parsed?.error?.message) {
           message = parsed.error.message;
           if (typeof parsed?.error?.code === 'number') {
             status = parsed.error.code;
           }
+        } else {
+          message = error.message;
         }
       } catch {
-        // use raw error.message
+        message = error.message;
       }
     }
 

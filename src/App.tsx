@@ -220,7 +220,7 @@ export default function App() {
     setResult(null);
 
     try {
-      const res = await fetch('/api/sort', {
+      const fetchPayload = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -235,14 +235,26 @@ export default function App() {
               }
             : null,
         }),
-      });
+      };
 
-      const rawText = await res.text();
+      let res = await fetch('/api/sort', fetchPayload);
+      let rawText = await res.text();
+
+      // If proxy returned warmup "Starting Server..." page, wait 2 seconds and retry
+      if (rawText.includes('Starting Server...') || rawText.includes('<title>Starting Server...</title>')) {
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        res = await fetch('/api/sort', fetchPayload);
+        rawText = await res.text();
+      }
+
       let data: any = null;
 
       try {
         data = JSON.parse(rawText);
       } catch {
+        if (rawText.includes('Starting Server...') || rawText.includes('<title>Starting Server...</title>')) {
+          throw new Error('The server is warming up. Please wait a few seconds and click Check again.');
+        }
         const snippet = rawText.slice(0, 200);
         throw new Error(
           snippet ? `Server error (${res.status}): ${snippet}` : `Server error (${res.status})`

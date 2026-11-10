@@ -4,23 +4,73 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
-      // Suppress Vite HMR WebSocket connection errors in environments without WebSocket upgrade support
-      window.addEventListener('unhandledrejection', function (e) {
-        if (
-          e?.reason?.message?.includes('WebSocket') ||
-          String(e?.reason).includes('WebSocket')
-        ) {
-          e.preventDefault();
+      (function () {
+        // Intercept Vite HMR WebSocket in environments where WebSocket upgrade is unsupported
+        const OriginalWebSocket = window.WebSocket;
+        if (typeof window !== 'undefined' && OriginalWebSocket) {
+          class ViteMockWebSocket extends EventTarget {
+            constructor(url, protocols) {
+              super();
+              this.url = url;
+              this.protocols = protocols;
+              this.readyState = 0; // CONNECTING
+              this.binaryType = 'blob';
+              this.bufferedAmount = 0;
+              this.extensions = '';
+              setTimeout(() => {
+                this.readyState = 1; // OPEN
+                const openEvt = new Event('open');
+                if (typeof this.onopen === 'function') this.onopen(openEvt);
+                this.dispatchEvent(openEvt);
+              }, 5);
+            }
+            send() {}
+            close() {
+              this.readyState = 3; // CLOSED
+              const closeEvt = new Event('close');
+              if (typeof this.onclose === 'function') this.onclose(closeEvt);
+              this.dispatchEvent(closeEvt);
+            }
+          }
+          ViteMockWebSocket.CONNECTING = 0;
+          ViteMockWebSocket.OPEN = 1;
+          ViteMockWebSocket.CLOSING = 2;
+          ViteMockWebSocket.CLOSED = 3;
+
+          window.WebSocket = function (url, protocols) {
+            const isViteSocket =
+              protocols === 'vite-hmr' ||
+              protocols === 'vite-ping' ||
+              (typeof url === 'string' && (url.includes('token=') || url.includes('vite')));
+            if (isViteSocket) {
+              return new ViteMockWebSocket(url, protocols);
+            }
+            return new OriginalWebSocket(url, protocols);
+          };
+          window.WebSocket.prototype = OriginalWebSocket.prototype;
+          window.WebSocket.CONNECTING = 0;
+          window.WebSocket.OPEN = 1;
+          window.WebSocket.CLOSING = 2;
+          window.WebSocket.CLOSED = 3;
         }
-      });
-      window.addEventListener('error', function (e) {
-        if (
-          e?.message?.includes('WebSocket') ||
-          e?.error?.message?.includes('WebSocket')
-        ) {
-          e.preventDefault();
-        }
-      });
+
+        // Suppress any stray WebSocket unhandled rejections or console logs
+        window.addEventListener('unhandledrejection', function (e) {
+          const reason = e?.reason;
+          const msg = reason?.message || String(reason || '');
+          if (msg.includes('WebSocket') || msg.includes('vite')) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+          }
+        });
+        window.addEventListener('error', function (e) {
+          const msg = e?.message || e?.error?.message || '';
+          if (msg.includes('WebSocket') || msg.includes('vite')) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+          }
+        });
+      })();
     </script>
     <title>GOMILENZ / ゴミレンズ</title>
     <meta name="description" content="Tokyo household waste sorting assistant for all 23 wards." />
