@@ -3,6 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Suppress Vite HMR WebSocket connection errors in environments without WebSocket upgrade support
+      window.addEventListener('unhandledrejection', function (e) {
+        if (
+          e?.reason?.message?.includes('WebSocket') ||
+          String(e?.reason).includes('WebSocket')
+        ) {
+          e.preventDefault();
+        }
+      });
+      window.addEventListener('error', function (e) {
+        if (
+          e?.message?.includes('WebSocket') ||
+          e?.error?.message?.includes('WebSocket')
+        ) {
+          e.preventDefault();
+        }
+      });
+    </script>
     <title>GOMILENZ / ゴミレンズ</title>
     <meta name="description" content="Tokyo household waste sorting assistant for all 23 wards." />
     <meta property="og:title" content="GOMILENZ / ゴミレンズ" />

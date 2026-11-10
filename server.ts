@@ -280,7 +280,7 @@ app.all('/api/*', (_req, res) => {
 if (process.env.NODE_ENV !== 'production') {
   const { createServer } = await import('vite');
   const vite = await createServer({
-    server: { middlewareMode: true },
+    server: { middlewareMode: true, hmr: false },
     appType: 'spa',
   });
   app.use(vite.middlewares);
